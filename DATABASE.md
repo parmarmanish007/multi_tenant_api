@@ -56,22 +56,7 @@ Note: AbstractUser adds many columns (username, email, password, is_active, etc.
 - action: varchar(255) NOT NULL
 - created_at: timestamp NOT NULL (auto_now_add)
 
-## Relationships and cardinality
-
-- Company 1 --- * User
-  - One company can have many users. (`User.company` FK)
-- Company 1 --- * Project
-  - A project belongs to a single company; a company can have many projects. (`Project.company` FK)
-- User 1 --- * Project (created_by)
-  - A project may be created by a user; `created_by` can be NULL.
-- Project 1 --- * Task
-  - Each task belongs to a single project; a project can have many tasks. (`Task.project` FK)
-- User 1 --- * Task (assigned_to)
-  - A task may be assigned to a user; `assigned_to` can be NULL.
-- User 1 --- * ActivityLog
-  - Each ActivityLog is created by a user (actor) and is required.
-- Task 1 --- * ActivityLog (nullable)
-  - ActivityLog.task is nullable and uses SET NULL on task deletion; logs persist even if task is deleted.
+## Relationships
 
 - `User.company` -> on_delete=models.CASCADE: deleting a company will delete its users (be careful in production).
 - `Project.company` -> on_delete=models.CASCADE: deleting a company removes projects.
