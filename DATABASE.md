@@ -13,7 +13,7 @@ Models:
 
 All models use standard integer primary keys (Django's default `id` column) unless you've configured a custom PK.
 
-## Entity definitions (Django field -> SQL type)
+## Entity definitions (Django field)
 
 1) Company
 - id: integer PRIMARY KEY (auto)
@@ -83,15 +83,15 @@ Note: AbstractUser adds many columns (username, email, password, is_active, etc.
 
 
 ### Cardinality & access patterns (table)
-| Relationship | Cardinality | FK column | Common access pattern |
-|---|---:|---|---|
-| Company -> User | 1 : * | accounts_user.company_id | List users by company, enforce company-level multi-tenancy |
-| Company -> Project | 1 : * | projects_project.company_id | List projects for a company, filter tasks via project.company_id |
-| Project -> Task | 1 : * | tasks_task.project_id | Pull tasks by project, or company via join to project |
-| User -> Task (assigned_to) | 1 : * (nullable) | tasks_task.assigned_to_id | Query tasks assigned to user, unassigned tasks |
-| User -> Project (created_by) | 1 : * (nullable) | projects_project.created_by_id | Track creator, can be null if user removed |
-| Task -> ActivityLog | 1 : * (nullable) | tasks_activitylog.task_id | Append-only log entries for task lifecycle |
-| User -> ActivityLog | 1 : * | tasks_activitylog.user_id | Actor of the action; used to audit who performed changes |
+| Relationship | FK column | Common access pattern |
+|---|---|---|
+| Company -> User | accounts_user.company_id | List users by company, enforce company-level multi-tenancy |
+| Company -> Project | projects_project.company_id | List projects for a company, filter tasks via project.company_id |
+| Project -> Task | tasks_task.project_id | Pull tasks by project, or company via join to project |
+| User -> Task (assigned_to) | tasks_task.assigned_to_id | Query tasks assigned to user, unassigned tasks |
+| User -> Project (created_by) | projects_project.created_by_id | Track creator, can be null if user removed |
+| Task -> ActivityLog | tasks_activitylog.task_id | Append-only log entries for task lifecycle |
+| User -> ActivityLog | tasks_activitylog.user_id | Actor of the action; used to audit who performed changes |
 
 ### Example JSON payloads
 - Create Task
