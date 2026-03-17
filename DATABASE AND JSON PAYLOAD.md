@@ -119,8 +119,8 @@ Endpoint: POST http://127.0.0.1:8000/api/tasks/
 Request JSON:
 ```json
 {
-  "title": "Create User",
-  "description": "Create User",
+  "title": "AWS Service R&D",
+  "description": "AWS Service R&D",
   "project": 1,
   "assigned_to": 5,
   "due_date": "2026-03-16",
