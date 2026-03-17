@@ -79,23 +79,61 @@ Note: AbstractUser adds many columns (username, email, password, is_active, etc.
 | User -> ActivityLog | tasks_activitylog.user_id | Actor of the action; used to audit who performed changes |
 
 ### Example JSON payloads
-- Create Task
 
+- Create Company
+
+Endpoint- http://127.0.0.1:8000/api/company/
 ```json
 {
-  "title": "Finish report",
-  "description": "Prepare final report for Q1",
-  "project": 12,
+  "name": "Technotha"
+}
+```
+
+- Create User
+
+Endpoint: POST http://127.0.0.1:8000/api/users/
+Request JSON:
+```json
+{
+  "company": 1,
+  "username": "user1",
+  "password": "User1Password123",
+  "role": "Member"
+}
+```
+
+- Create Project
+
+Endpoint: POST http://127.0.0.1:8000/api/projects/
+Request JSON:
+```json
+{
+  "company": 1,
+  "name": "Multi Tenant"
+}
+```
+
+- Create Task
+
+Endpoint: POST http://127.0.0.1:8000/api/tasks/
+Request JSON:
+```json
+{
+  "title": "Create User",
+  "description": "Create User",
+  "project": 1,
   "assigned_to": 5,
-  "due_date": "2026-04-01"
+  "due_date": "2026-03-16",
+  "status": "Todo"
 }
 ```
 
 - Update Task (partial)
 
+Endpoint: PATCH http://127.0.0.1:8000/api/tasks/1/
+Request JSON:
 ```json
 {
-  "status": "IN_PROGRESS",
-  "assigned_to": 7
+  "status": "In Progress"
 }
 ``` 
