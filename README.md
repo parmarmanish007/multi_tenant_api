@@ -55,16 +55,19 @@ Important `.env` variables (already present in the `.env` template):
 Example (.env)
 
 ```properties
-SECRET_KEY=your_secret_key_here
+SECRET_KEY=your-very-strong-secret-key
 DEBUG=True
 ALLOWED_HOSTS=localhost,127.0.0.1
+
 DB_ENGINE=django.db.backends.postgresql
 DB_NAME=saas_db
 DB_USER=postgres
 DB_PASSWORD=postgres
 DB_HOST=localhost
 DB_PORT=5432
-SIMPLE_JWT_SECRET=your_jwt_secret
+
+SIMPLE_JWT_SECRET=your-jwt-secret-key
+
 REACT_APP_API_URL=http://localhost:8000/api
 ```
 
